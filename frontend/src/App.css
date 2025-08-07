@@ -1,1 +1,842 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Audiowide&family=Bungee&display=swap');
+
+/* Gaming Theme for Meme Wars */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Rajdhani', 'Orbitron', 'Audiowide', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 255, 214, 0.15) 0%, transparent 50%),
+    linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+  background-attachment: fixed;
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Animated star field background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(1px 1px at 160px 30px, rgba(255,0,255,0.8), transparent);
+  background-repeat: repeat;
+  background-size: 200px 150px;
+  animation: starField 25s linear infinite;
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Floating particles */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px, 80px 80px;
+  background-position: 0 0, 50px 50px, 25px 25px;
+  animation: particleFloat 30s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes starField {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-150px) translateX(20px); }
+}
+
+@keyframes particleFloat {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-20px, -100px) rotate(360deg); }
+}
+
+.App {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HUD-style overlay elements */
+.hud-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Corner HUD elements */
+.hud-corner {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  pointer-events: none;
+}
+
+.hud-corner::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 0, 255, 0.8);
+}
+
+.hud-corner.top-left {
+  top: 20px;
+  left: 20px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corner.top-left::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corner.top-right {
+  top: 20px;
+  right: 20px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.hud-corner.top-right::before {
+  top: -2px;
+  right: -2px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.hud-corner.bottom-left {
+  bottom: 20px;
+  left: 20px;
+  border-right: none;
+  border-top: none;
+}
+
+.hud-corner.bottom-left::before {
+  bottom: -2px;
+  left: -2px;
+  border-right: none;
+  border-top: none;
+}
+
+.hud-corner.bottom-right {
+  bottom: 20px;
+  right: 20px;
+  border-left: none;
+  border-top: none;
+}
+
+.hud-corner.bottom-right::before {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Status bars */
+.status-bar {
+  position: fixed;
+  height: 4px;
+  background: linear-gradient(90deg, #00ffff, #ff00ff, #ffff00);
+  animation: statusPulse 2s ease-in-out infinite;
+  z-index: 999;
+}
+
+.status-bar.top {
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.status-bar.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 0.6; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.5); }
+}
+
+/* Gaming background effects */
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.15) 0%, transparent 50%);
+  z-index: -1;
+  animation: backgroundPulse 8s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Gaming button styles */
+.btn-game {
+  position: relative;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(255, 107, 107, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.btn-game::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-game:hover::before {
+  left: 100%;
+}
+
+.btn-game:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(255, 107, 107, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-game:active {
+  transform: translateY(0);
+}
+
+/* Gaming card styles */
+.game-card {
+  background: linear-gradient(145deg, rgba(30, 30, 60, 0.9), rgba(20, 20, 40, 0.9));
+  border: 2px solid rgba(120, 119, 198, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.game-card:hover {
+  border-color: rgba(120, 119, 198, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Gaming input styles */
+.game-input {
+  background: rgba(20, 20, 40, 0.8);
+  border: 2px solid rgba(120, 119, 198, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.game-input:focus {
+  outline: none;
+  border-color: #4ecdc4;
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+}
+
+.game-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Glitch effect for title */
+.glitch {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 0.5s infinite;
+  color: #ff00ff;
+  z-index: -1;
+}
+
+.glitch::after {
+  animation: glitch-2 0.5s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-1 {
+  0%, 90%, 100% { transform: translate(0); }
+  10% { transform: translate(-2px, -2px); }
+  20% { transform: translate(2px, 2px); }
+  30% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 90%, 100% { transform: translate(0); }
+  15% { transform: translate(2px, -2px); }
+  25% { transform: translate(-2px, 2px); }
+  35% { transform: translate(2px, 2px); }
+  45% { transform: translate(-2px, -2px); }
+}
+
+/* Progress bar gaming style */
+.progress-bar-game {
+  background: rgba(20, 20, 40, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-game::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    transparent 100%);
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* VS battle animation */
+.vs-battle {
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff6b6b;
+  text-shadow: 
+    0 0 10px #ff6b6b,
+    0 0 20px #ff6b6b,
+    0 0 30px #ff6b6b;
+  animation: battlePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes battlePulse {
+  0%, 100% { 
+    transform: scale(1);
+    text-shadow: 
+      0 0 10px #ff6b6b,
+      0 0 20px #ff6b6b,
+      0 0 30px #ff6b6b;
+  }
+  50% { 
+    transform: scale(1.1);
+    text-shadow: 
+      0 0 15px #ff6b6b,
+      0 0 30px #ff6b6b,
+      0 0 45px #ff6b6b;
+  }
+}
+
+/* Loading spinner gaming style */
+.spinner-game {
+  border: 3px solid rgba(120, 119, 198, 0.3);
+  border-top: 3px solid #4ecdc4;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spinGame 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+@keyframes spinGame {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Custom scrollbar gaming theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(20, 20, 40, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ff8a8a, #6ee0d6);
+}
+
+/* Meme container gaming style */
+.meme-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid rgba(120, 119, 198, 0.3);
+  transition: all 0.3s ease;
+}
+
+.meme-container:hover {
+  border-color: #4ecdc4;
+  box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+}
+
+.meme-container img {
+  transition: transform 0.3s ease;
+}
+
+.meme-container:hover img {
+  transform: scale(1.02);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .glitch {
+    font-size: 2rem;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid #4ecdc4;
+  outline-offset: 2px;
+}
+
+/* Status indicators */
+.status-online {
+  background: #4ecdc4;
+  box-shadow: 0 0 10px #4ecdc4;
+}
+
+.status-offline {
+  background: #666;
+}
+
+.status-waiting {
+  background: #ff6b6b;
+  animation: pulse 2s infinite;
+}
+
+/* Particle effects */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Battle arena styling */
+.battle-arena {
+  position: relative;
+  background: linear-gradient(45deg, 
+    rgba(255, 107, 107, 0.1) 0%, 
+    rgba(78, 205, 196, 0.1) 100%);
+  border: 2px solid rgba(255, 107, 107, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+}
+
+.battle-arena::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ff6b6b);
+  border-radius: 20px;
+  z-index: -1;
+  animation: borderGlow 3s linear infinite;
+}
+
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Winner announcement */
+.winner-announcement {
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  color: #000;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 
+    0 0 30px rgba(255, 215, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: victoryPulse 2s ease-in-out infinite;
+}
+
+@keyframes victoryPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Enhanced Gaming Typography */
+.title-main {
+  font-family: 'Audiowide', 'Orbitron', monospace;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #ffe66d, #ff6b6b);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+}
+
+.title-secondary {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-cyber {
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Dynamic HUD elements */
+.hud-element {
+  position: relative;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  margin: 0.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hud-element::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  animation: scanLine 3s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Floating sidebar elements */
+.sidebar-left {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sidebar-right {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.mini-radar {
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgba(0, 255, 255, 0.6);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+  position: relative;
+  animation: radarSweep 2s linear infinite;
+}
+
+.mini-radar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 40%;
+  background: linear-gradient(to bottom, #00ffff, transparent);
+  transform-origin: bottom;
+  animation: radarLine 2s linear infinite;
+}
+
+@keyframes radarSweep {
+  0% { border-color: rgba(0, 255, 255, 0.6); }
+  50% { border-color: rgba(255, 0, 255, 0.8); }
+  100% { border-color: rgba(0, 255, 255, 0.6); }
+}
+
+@keyframes radarLine {
+  0% { transform: translate(-50%, -100%) rotate(0deg); }
+  100% { transform: translate(-50%, -100%) rotate(360deg); }
+}
+
+/* Power level indicator */
+.power-indicator {
+  width: 20px;
+  height: 100px;
+  background: linear-gradient(to top, #ff0000 0%, #ffff00 50%, #00ff00 100%);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.power-indicator::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, #00ff00, #ffff00);
+  animation: powerFluctuate 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes powerFluctuate {
+  0% { height: 40%; }
+  100% { height: 80%; }
+}
+
+/* Battle grid background */
+.battle-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* Holographic effects */
+.hologram {
+  position: relative;
+  background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+  background-size: 20px 20px;
+  animation: hologramShimmer 2s linear infinite;
+}
+
+@keyframes hologramShimmer {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+/* Terminal-style text animations */
+.terminal-text {
+  font-family: 'Share Tech Mono', monospace;
+  color: #00ff00;
+  text-shadow: 0 0 5px #00ff00;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2s steps(40) 1s forwards;
+  width: 0;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Energy shield effect */
+.energy-shield {
+  position: relative;
+  overflow: hidden;
+}
+
+.energy-shield::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(0, 255, 255, 0.3) 60deg,
+    rgba(255, 0, 255, 0.3) 120deg,
+    transparent 180deg,
+    rgba(255, 255, 0, 0.3) 240deg,
+    rgba(0, 255, 255, 0.3) 300deg,
+    transparent 360deg
+  );
+  animation: shieldRotate 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes shieldRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive layouts for full page coverage */
+.page-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "sidebar-left content sidebar-right"
+    "footer footer footer";
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.main-content {
+  grid-area: content;
+  width: 100%;
+  max-width: none;
+}
+
+.page-header {
+  grid-area: header;
+  width: 100%;
+}
+
+.page-footer {
+  grid-area: footer;
+  width: 100%;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .page-wrapper {
+    grid-template-areas: 
+      "header"
+      "content"
+      "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+  
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
+  }
+  
+  .hud-corner {
+    width: 60px;
+    height: 60px;
+  }
+}
