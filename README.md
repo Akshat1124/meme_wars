@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+Meme Battle ⚔️
+The Ultimate Meme Battle Arena! Two players enter, one meme reigns supreme.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a real-time meme voting application where two players compete against each other with their best memes, and the audience votes live to decide the winner.
 
-## Available Scripts
+✨ Features
+Real-time Voting: A live voting system where results update instantly.
 
-In the project directory, you can run:
+Gaming UI: A modern, game-like experience with a dark theme, neon highlights, and smooth animations.
 
-### `npm start`
+Room-based Gameplay: Create private rooms and challenge your friends.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Easy Meme Upload: Effortlessly upload meme images from your device.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Live Leaderboard: See who's in the lead and by how many votes.
 
-### `npm test`
+Mock Backend: Test the entire application flow using your browser's localStorage without any server setup.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🚀 Tech Stack
+Frontend: React
 
-### `npm run build`
+Styling: Tailwind CSS
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Animations: Framer Motion
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Icons: Lucide React
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Routing: React Router
 
-### `npm run eject`
+🎮 How It Works
+Create/Join Room: Start a new battle or join a friend's room.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Upload Memes: Both players upload their respective memes.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Share & Vote: Share the voting link with your audience. Each person gets one vote.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Crown the Winner: The meme with the most votes wins!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🛠️ Getting Started
+Follow the steps below to run this project on your local machine.
 
-## Learn More
+Clone the Repository:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+git clone https://github.com/akshat1124/meme_wars.git
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Navigate to the Project Directory:
 
-### Code Splitting
+cd meme_wars
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Install Dependencies:
 
-### Analyzing the Bundle Size
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Start the Development Server:
 
-### Making a Progressive Web App
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Now, open http://localhost:3000 in your browser to see the app.
 
-### Advanced Configuration
+🔮 Future Scope
+Real Backend: Replace localStorage with a real-time backend (like Firebase or Socket.io) to make it a full-fledged multi-player game.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+User Authentication: Implement user accounts for players.
 
-### Deployment
+Tournament Mode: Organize tournaments with multiple rounds.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📄 License
+This project is licensed under the MIT License.
