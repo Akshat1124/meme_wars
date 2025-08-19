@@ -20,18 +20,25 @@ const NeonButton = ({ children, onClick, className = '', disabled = false }) => 
 );
 
 export default function MemeUploader({ roomId, slot = "Player", onChange, existing }) {
-  const [name, setName] = useState(getLS("mb_player_name", ""));
+  // FIX: Initialize state locally. Don't rely on localStorage for the input's value.
+  const [name, setName] = useState("");
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("info"); // 'info', 'success', 'error'
 
+  // FIX: Set the initial name only once when the component loads.
+  // This makes the two components independent of each other.
   useEffect(() => {
-    if (existing?.playerName && !name) {
+    if (existing?.playerName) {
       setName(existing.playerName);
+    } else if (slot === 'Player 1') { // Only Player 1 gets the globally saved name
+      setName(getLS("mb_player_name", ""));
     }
-  }, [existing?.playerName, name]);
+    // We leave Player 2's name blank by default if no meme is uploaded
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [existing?.playerName]); // Run only when `existing` prop changes
 
   useEffect(() => {
     if (!file) {
@@ -57,6 +64,7 @@ export default function MemeUploader({ roomId, slot = "Player", onChange, existi
         return;
       }
       setBusy(true);
+      // Save the name for future sessions, but it won't affect the other input now.
       saveLS("mb_player_name", name.trim());
       await api.upload({ roomId, playerName: name.trim(), file });
       setFile(null);
